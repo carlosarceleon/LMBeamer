@@ -1,0 +1,375 @@
+% LM Wind Power Presentation Class for Beamer
+%
+% Carlos Arce <caar@lmwindpower.com> 2011
+%
+% Changelog:
+%
+% Version 0.1:
+%   First distributed version---for testing.
+
+\ProvidesPackage{beamerthemeLM}[2011/11/11]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Call a few packages for later
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{pgf}
+\RequirePackage{tikz}
+\RequirePackage{array}
+\RequirePackage[config,font={scriptsize,it},labelfont={scriptsize,bf,color=LMBlue},labelsep=quad]{caption}
+
+\let\Tiny=\tiny
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The LM Color Palette
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{LMBlue}{RGB}{1,63,112}
+\definecolor{LMGray}{RGB}{118,129,135}
+\definecolor{LMLightBlue}{RGB}{0,170,200}
+
+\definecolor{LMWarmOrange}{RGB}{230,80,21}
+
+\definecolor{LMGray75}{RGB}{137,152,160}
+\definecolor{LMGray50}{RGB}{173,184,190}
+\definecolor{LMGray25}{RGB}{210,217,222}
+
+\definecolor{LMLightBlue75}{RGB}{22,189,215}
+\definecolor{LMLightBlue50}{RGB}{112,208,226}
+\definecolor{LMLightBlue25}{RGB}{189,229,240}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Declare a few images for PFG to use later
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\pgfdeclareimage[width=.40\paperwidth]{small-logo}{tudelft-lm-logo}
+\pgfdeclareimage[width=.20\paperwidth]{small-logo}{LMBlades}
+\pgfdeclareimage[height=.5\paperheight]{title-side}{LMTitlePageSide}
+\pgfdeclareimage[height=1.\paperheight]{frame-side}{LMSlideSide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Specify the title, author and date styles
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamercolor{date}{fg=white}
+\setbeamercolor{title}{fg=white}
+\setbeamerfont{title}{series=\bfseries}
+\setbeamercolor{author}{fg=white}
+\setbeamerfont{author}{size=\scriptsize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The title page template
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{title page}{
+\begin{tikzpicture}[remember picture, overlay]
+
+  %The text on the titlepage
+  \node[text width=6.0cm, shift={(-3.5cm,-2.7cm)}] at (current page.north east) {
+  \begin{minipage}[t!]{6cm}
+	 {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\\}
+	 \vspace{0.0cm}\\
+	 {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate}
+	 \vspace{0cm}\\
+	 {\usebeamerfont{author}\usebeamercolor[fg]{author}By \insertauthor\\}
+  \end{minipage}
+  };
+
+\end{tikzpicture}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The title page graphics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\addtobeamertemplate{title page}{%
+\usebeamertemplate{title background}%
+\vskip .2\paperheight%
+}
+{}
+
+\newcommand\DoBlueBackground{
+\pgfpathmoveto{\pgfpointorigin}
+%The big blue square on the upper half of the page
+\pgfpathrectanglecorners{\pgfpoint{0pt}{0pt}}{\pgfpoint{\paperwidth}{-0.5\paperheight}}
+\pgfsetfillcolor{LMBlue}
+\pgfusepath{fill}
+}
+
+\setbeamertemplate{title background}{%
+\begin{pgfpicture}
+\pgf@relevantforpicturesizefalse
+\pgftransformxshift{-\Gm@lmargin}
+\pgftransformyshift{0.25\paperheight+20pt}
+\DoBlueBackground
+%The ``The Power To Deliver''' side graphic
+\pgfputat{\pgfpoint{-\Gm@lmargin}{-0.5\paperheight+20pt}}{\pgfuseimage{title-side}}
+%The LM logo lower right
+%\pgfputat{\pgfpoint{0.55\paperwidth-\Gm@lmargin}{-0.65\paperheight}}{\pgfuseimage{small-logo}}
+\pgfputat{\pgfpoint{0.70\paperwidth-\Gm@lmargin}{-0.65\paperheight}}{\pgfuseimage{small-logo}}
+\end{pgfpicture}%
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The 'blade' leit-motif on the slide's left side
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{sidebar canvas left}{
+\begin{pgfpicture}{0.01\paperwidth}{0\paperheight}{0.05\paperwidth}{\paperheight}
+\pgfputat{\pgfpoint{0.01\paperwidth}{0.00\paperheight}}{\pgfuseimage{frame-side}}
+\end{pgfpicture}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The slide frame title and LM logo on the upper right side
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamercolor{frametitle}{fg=LMLightBlue}
+
+\setbeamerfont{framesubtitle}{size=\small}
+\setbeamercolor{framesubtitle}{fg=LMGray50}
+
+\setbeamerfont{footnote}{size=\tiny}
+
+\setbeamertemplate{frametitle}{
+
+\begin{tikzpicture}[remember picture, overlay]
+  \node[shift={(6.0cm,-1.3cm)}] at (current page.north west) {
+  \begin{minipage}[t!]{10cm}
+  \insertframetitle\\
+  {\small\textcolor{LMGray}{\insertframesubtitle}}
+  \end{minipage}
+  };
+
+  %\node[shift={(-2.3cm,-0.92cm)}] at (current page.north east) {
+  \node[shift={(-0.8cm,-0.92cm)}] at (current page.north east) {
+  \begin{minipage}[t!]{0.30\paperwidth}
+      %\includegraphics[width=0.30\paperwidth]{tudelft-lm-logo}
+      \includegraphics[width=0.15\paperwidth]{LMBlades}
+  \end{minipage}
+  };
+\end{tikzpicture}
+
+}
+
+\useinnertheme{rectangles}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Start defining a bunch of smaller elements' styles
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamercolor{footline}{fg=LMGray}
+\setbeamercolor{headline}{fg=white}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{
+  \hspace{0.5cm}
+  \insertshorttitle
+  \hfill
+  \insertframenumber/\inserttotalframenumber\hspace{0.15cm}
+\vspace{0.1cm}
+}
+
+\setbeamercolor{structure}{fg=LMLightBlue}
+
+%Kill the Beamer navigation symbols
+\setbeamertemplate{navigation symbols}{}
+\setbeamercolor{navigation symbols}{fg=LMGray}
+
+\setbeamercolor{normal text}{fg=LMGray}
+
+\setbeamertemplate{itemize items}[circle]
+
+\setbeamercolor{itemize item}{fg=LMBlue}
+\setbeamercolor{itemize subitem}{fg=LMBlue}
+\setbeamercolor{itemize subsubitem}{fg=LMBlue}
+\setbeamerfont{itemize subitem}{size=\small}
+\setbeamerfont{itemize subsubitem}{size=\small}
+
+\setbeamertemplate{enumerate items}[default]
+\setbeamercolor{enumerate item}{fg=LMBlue}
+\setbeamercolor{enumerate subitem}{fg=LMBlue}
+\setbeamercolor{enumerate subsubitem}{fg=LMBlue}
+\setbeamerfont{enumerate subitem}{size=\small}
+\setbeamerfont{enumerate subsubitem}{size=\small}
+
+\setbeamercolor{description item}{fg=LMBlue}
+\setbeamerfont{description item}{series=\bfseries, size=\normalsize}
+\setbeamerfont{description subitem}{size=\small}
+\setbeamerfont{description subsubitem}{size=\small}
+
+\setbeamercolor{alerted text}{fg=LMWarmOrange}
+
+\setbeamercolor{block title}{fg=white,bg=LMLightBlue}
+\setbeamercolor{block title example}{fg=white,bg=LMGray}
+\setbeamercolor{block title alerted}{fg=white,bg=LMWarmOrange}
+
+\renewcommand{\contentsname}{AGENDA}
+\setbeamertemplate{section in toc}[default]
+\setbeamertemplate{subsection in toc}[default]
+\setbeamertemplate{subsubsection in toc}[default]
+\setbeamercolor{section in toc}{fg=LMLightBlue}
+
+\setbeamercolor{button}{bg=LMBlue,fg=white}
+
+\setbeamercovered{transparent=40}
+
+%\setbeamerfont{caption}{size=\tiny,shape=\itshape}
+%\setbeamerfont{caption name}{size=\tiny,shape=\upshape}
+
+\newcommand\Agenda{
+\begin{frame}
+  {\Large \textcolor{LMLightBlue} AGENDA}
+  \vspace{0.2cm}
+  \begin{center}
+	 \rule{0.9\textwidth}{1pt}
+  \end{center}
+  \hspace{1cm}\begin{minipage}{0.7\textwidth}
+  \tableofcontents
+  \end{minipage}
+  \begin{center}
+	 \rule{0.9\textwidth}{1pt}
+  \end{center}
+\end{frame}
+}
+
+\newcommand\Disclaimer{
+\begin{frame}
+  \begin{alertblock}{Disclaimer}
+	 {\tiny\it
+	 \vspace{0.5cm}
+
+	 The information presented herein is subject to the accuracy of the tools involved in the process of simulating, shaping and characterization of the blade sets involved, and the simulated turbine's operational settings. The methods are built to resemble as closely as possible the conditions given by the IEC61400-11 (2002) acoustic measurement standard for wind turbines but are subject to exceptions such as, but not limited to, wind gust noise, forest, pasture and other vegetation noise, animal noise, measurement variations in time, atmospheric and terrain effects on noise directivity, reflectivity and refraction effects, turbine noise other than what is generated by aeroacoustic phenomena and that which does not involve the moving blades such as tower aeroacoustic noise or its aerodynamic interaction with the blades. 
+	 \vspace{0.5cm}
+
+	 The results presented are subject to further validation with field studies and are offered as such without any further guarantee of accurateness.
+
+}
+  \end{alertblock}
+\end{frame}
+}
+
+\newcommand\CurrentSection{
+\begin{frame}
+  {\Large \textcolor{LMLightBlue} AGENDA}
+  \vspace{0.2cm}
+  \begin{center}
+	 \rule{0.9\textwidth}{1pt}
+  \end{center}
+  \hspace{1cm}\begin{minipage}{0.7\textwidth}
+  \tableofcontents[currentsection]
+  \end{minipage}
+  \begin{center}
+	 \rule{0.9\textwidth}{1pt}
+  \end{center}
+\end{frame}
+}
+
+\addtobeamertemplate{block begin}{%
+\begin{center}
+  \begin{minipage}{0.8\textwidth}
+}{}
+\addtobeamertemplate{block end}{%
+}{\end{minipage}\end{center}}
+
+\addtobeamertemplate{block alerted begin}{%
+\begin{center}
+  \begin{minipage}{0.8\textwidth}
+}{}
+\addtobeamertemplate{block alerted end}{%
+}{\end{minipage}\end{center}}
+
+\addtobeamertemplate{block example begin}{%
+  \setlength{\textwidth}{0.8\textwidth}%
+}{}
+
+\newcommand{\jobtitle}[1]{\renewcommand{\jobtitleHandler}{#1}}
+\newcommand{\jobtitleHandler}{}
+
+\newcommand{\department}[1]{\renewcommand{\departmentHandler}{#1}}
+\newcommand{\departmentHandler}{}
+
+\newcommand{\phone}[1]{\def\@phone{#1}}
+\phone{}
+\newcommand{\mobile}[1]{\def\@mobile{#1}}
+\mobile{}
+\newcommand{\email}[1]{\def\@email{#1}}
+\email{}
+
+\newcommand\ClosePresentation{
+   \begin{frame}
+      \frametitle{Thank you for your time}
+      \vspace{1cm}
+      \begin{tabular}{@{\hspace{0pt}}p{0.4\textwidth}p{0.4\textwidth}}
+         \scriptsize\textbf{Contact details:}&\scriptsize\textbf{Head quarters:}\\
+
+         \begin{minipage}[t]{0.4\paperwidth}
+            \textcolor{LMLightBlue}{
+               \vspace{1pt}\\
+               \scriptsize
+               \vspace{-5pt}\insertauthor\\
+               \vspace{-5pt}\jobtitleHandler\\
+               \departmentHandler\\
+            }
+         \end{minipage}
+         &
+         \begin{minipage}[t]{0.4\paperwidth}
+            \textcolor{LMLightBlue}{\scriptsize
+               \vspace{1pt}\\
+               \vspace{-5pt}LM Wind Power\\
+               \vspace{-5pt}Jupitervej 6\\
+               \vspace{-5pt}6000 Kolding\\
+               \vspace{-5pt}Denmark\\
+            }
+         \end{minipage}
+         \\
+         \begin{minipage}[t]{0.4\paperwidth}
+            \setlength{\parsep}{-10pt}
+            \vspace{3pt}
+            \textcolor{LMLightBlue}{\scriptsize
+               \ifx\@phone\@empty
+               \relax
+               \else
+               \begin{tabular}{@{\hspace{0pt}}p{3mm}l}
+                  Tel & \@phone
+               \end{tabular}
+               \vspace{-1.5mm}\\
+               \fi%
+               \ifx\@mobile\@empty
+               \relax
+               \else
+               \begin{tabular}{@{\hspace{0pt}}p{3mm}l}
+                  Mob & \@mobile 
+               \end{tabular}
+               \vspace{-1.5mm}\\
+               \fi%
+               \ifx\@email\@empty
+               \relax
+               \else
+               \begin{tabular}{@{\hspace{0pt}}p{3mm}l}
+                   & \\
+                  E & {\tt \@email}
+               \end{tabular}
+               \vspace{-1.5mm}\\
+               \fi%
+            }
+         \end{minipage}
+         &
+         \begin{minipage}[t]{0.4\paperwidth}
+            \textcolor{LMLightBlue}{\scriptsize
+               \vspace{1pt}\\
+               \begin{tabular}{@{\hspace{0pt}}ll}
+                  Tel & +45 79 84 00 00\\
+                  Fax & +45 79 80 00 01\\
+                  \\
+                  E & {\tt info@lmwindpower.com}\\
+                  W & {\tt lmwindpower.com}
+               \end{tabular}
+            }
+         \end{minipage}\\
+      \end{tabular}
+      \vspace{0.7cm}\\
+      \begin{minipage}[t]{0.7\textwidth}
+         {\tiny
+            \textbf{Note:}\\
+            \vspace{-6pt}The contents of this presentation are confidential and may not be copied,\\
+            \vspace{-6pt}distributed, published or reproduced in whole or in part, or disclosed or \\
+            \vspace{-6pt}distributed by recipients to any other person.
+         }
+      \end{minipage}
+   \end{frame}
+}
+

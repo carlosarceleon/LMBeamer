@@ -1,0 +1,13 @@
+\beamer@endinputifotherversion {3.10pt}
+\beamer@sectionintoc {1}{Text}{3}{0}{1}
+\beamer@sectionintoc {2}{Lists}{4}{0}{2}
+\beamer@sectionintoc {3}{Text effects}{7}{0}{3}
+\beamer@sectionintoc {4}{Blocks}{12}{0}{4}
+\beamer@sectionintoc {5}{Floats}{13}{0}{5}
+\beamer@subsectionintoc {5}{1}{Equations}{13}{0}{5}
+\beamer@subsectionintoc {5}{2}{Figures}{15}{0}{5}
+\beamer@subsectionintoc {5}{3}{Tables}{16}{0}{5}
+\beamer@sectionintoc {6}{Colors}{17}{0}{6}
+\beamer@sectionintoc {7}{Requirements}{18}{0}{7}
+\beamer@sectionintoc {8}{To do}{19}{0}{8}
+\beamer@sectionintoc {9}{Front and back matter}{20}{0}{9}

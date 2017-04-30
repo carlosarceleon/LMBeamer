@@ -1,0 +1,277 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THE LM WIMDP POWER BEAMER CLASS
+% (example document)
+%
+% Carlos Arce <caar@lmwindpower.com>
+% November, 2011
+%
+% Description:
+%	This document contains most if not all the elements
+%	that will likely be used in a presentation. Other
+%	elements, and details on how to manipulate the 
+%	ones herein presented are detailed in the Beamer
+%	Class User Guide (google it).
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%Everything starts like this
+%But add the xcolot=table option if you want colored tables
+\documentclass[xcolor=table]{beamer}
+
+%Of course, the LM beamer class call:
+\usetheme{LM}
+
+%Any other packages should go here
+
+%And the begin document environment as usual
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The owner information
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%The title (short title in square brackets)
+\title[LM Beamer]{The LM Wind Power Beamer Class}
+
+%The author (short author in square brackets, although not used)
+\author[CAAR]{Carlos Arce}
+
+%The date (put \today to insert today's date automatically)
+\date{\today} 
+
+%The owner's job title at LM (for the contact information)
+\jobtitle{Acoustic Prediction Methods}
+
+%The owner's department
+\department{Aero group}
+
+%The owner's fixed line phone number (optional)
+\phone{+45 79 84 07 67}
+
+%The owner's mobile phone number (optional)
+%\mobile{2348}
+
+%The owner's email (optional)
+\email{caar@lmwindpower.com}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The front matter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%The title page (remember to use the option plain!)
+\frame[plain]{
+\titlepage
+} 
+
+%Include an LM style formatted table of contents
+\Agenda
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The body of the presentation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% - Use sections and subsections wisely
+%
+
+\section{Text} 
+\frame{\frametitle{Regular text} 
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+}
+
+\section{Lists} 
+\frame{
+\frametitle{Bulleted lists}
+Use the {\tt itemize} environment to create itemized lists:
+\begin{itemize}
+\item Item 1
+  \begin{itemize}
+	 \item Subitem 1
+  \end{itemize}
+\item Item 2
+  \begin{itemize}
+	 \item Subitem 1
+	 \item Subitem 2
+  \end{itemize}
+\end{itemize} 
+Later it will be seen how to uncover these piecewise: 
+\hyperlink{piecewise}{\beamerbutton{Piecewise uncovering}}
+}
+
+\frame{
+\frametitle{Enumerated lists}
+Enumerated lists can be created with \LaTeX's usual {\tt enumerate} environment and will look like this:
+\begin{enumerate}
+\item Item 1
+  \begin{enumerate}
+	 \item Subitem 1
+  \end{enumerate}
+\item Item 2
+  \begin{enumerate}
+	 \item Subitem 1
+	 \item Subitem 2
+  \end{enumerate}
+\end{enumerate} 
+}
+
+\frame{
+Use the {\tt description} environment to list descriptions. Unfortunately it looks like these should be quite short to keep the alignment tamed.
+\frametitle{Description lists}
+\begin{description}
+  \item[$1^{\text{st}}$ item] its description
+  \item[$2^{\text{nd}}$ item] second's description
+  \item[$3^{\text{rd}}$ item] and so forth...
+\end{description}
+}
+
+\section{Text effects} 
+\frame{\frametitle{Alerted text}
+This text is normal, while \alert{this is alerted}.
+}
+
+\begin{frame}[label=piecewise]
+\frametitle{Piecewise uncovering of items}
+Piecewise uncovering can be used. In this case alerted text is used for the current item with the command {\tt \\item<X-| alert@1>} where {\tt X} is the slide number it should appear on.
+\begin{itemize}
+\item<1-| alert@1> First point.
+\item<2-| alert@2> Second point.
+\item<3-| alert@3> Third point.
+\end{itemize}
+\vfill
+\uncover<4->{
+A transparency of 40\% is by default applied to uncovered items and can be modified by using the command {\tt \\setbeamercovered\{transparent=XX\}}
+}
+
+\end{frame}
+
+
+\section{Blocks}
+\frame{\frametitle{Blocs}
+
+\begin{block}{Title of the bloc}
+bloc text
+\end{block}
+
+\begin{exampleblock}{Title of ``example'' bloc}
+bloc text
+\end{exampleblock}
+
+
+\begin{alertblock}{Title of ``alerted'' bloc}
+bloc text
+\end{alertblock}
+}
+
+\section{Floats}
+\subsection{Equations}
+\frame{
+\frametitle{Equations}
+Equations can be typeset using the regular \LaTeX commands\invisible<1>{, but of course can contain overlays:}
+\begin{equation}
+  \rho\left( \frac{\partial \mathbf{v}}{\partial t}+ \alert<2->{\mathbf{v}\cdot\nabla\mathbf{v}} \right) = -\nabla p + \mu \nabla^2\mathbf{v} + \mathbf{f}
+  \label{ns}
+\end{equation}
+}
+
+\subsection{Figures}
+\frame{
+\frametitle{Figures}
+Figures can be included using the {\tt figure} environment and the {\\includegraphics} command (in case of using a PNG image)
+\vspace{1cm}
+\begin{figure}[h]
+  \begin{center}
+	 \includegraphics[width=0.5\paperheight]{LMBlades.png}
+  \end{center}
+  \caption{This is LM's logo, for example}
+  \label{fig:LM}
+\end{figure}
+}
+
+\subsection{Tables}
+\frame{\frametitle{Tables}
+The default format used for tables by the LM template in PowerPoint sets the header row as dark blue, then the rest of rows as alternating between the LM gray at 25\% and white. Since the purpose of tables is too broad, this format will not be generalized in this Beamer class.
+
+None the less, by using the command {\tt \char`\\rowcolors\{X\}\{COLOR1\}\{COLOR2\}} one can produce a table that starts coloring in row {\tt X} with {\tt COLOR1} in the even rows and {\tt COLOR2} in the uneven rows.
+
+%This command sets interchanging colors between the table rows, much like
+%LM's PowerPoint template, yet the first column must be specified independently
+\rowcolors{2}{white}{LMGray25}
+\begin{center}
+\begin{tabular}{c c c c c}
+  \rowcolor{LMBlue}
+  & \bf C1 & \bf C2 & \bf C3 & \bf C4\\ 
+R1& A & B & C & D\\ 
+R2& 1 & 2 & 3 & 4\\  
+R3& A & B & C & D\\ 
+\end{tabular} 
+\end{center}
+}
+
+
+%These colors are predefined in the LM Beamer class; use them freely
+\section{Colors}
+\frame{
+\frametitle{Predefined colors}
+The following colors have been predefined:
+\begin{itemize}
+  \item \textcolor{LMBlue}{LMBlue}
+  \item \textcolor{LMGray}{LMGray}
+  \item \textcolor{LMGray75}{LMGray75}
+  \item \textcolor{LMGray50}{LMGray50}
+  \item \textcolor{LMGray25}{LMGray25}
+  \item \textcolor{LMLightBlue}{LMLightBlue}
+  \item \textcolor{LMLightBlue75}{LMLightBlue75}
+  \item \textcolor{LMLightBlue50}{LMLightBlue50}
+  \item \textcolor{LMLightBlue25}{LMLightBlue25}
+  \item \textcolor{LMWarmOrange}{LMWarmOrange}
+\end{itemize}
+}
+
+\section{Requirements}
+\begin{frame}
+  \frametitle{Requirements}
+  This theme makes use of the drawing abilities of the PGF/TikZ packages, so they are required to compile successfully.
+\end{frame}
+
+\section{To do}
+\begin{frame}
+  \frametitle{Things left to do}
+  \begin{itemize}
+	 \item Fix undefined font warnings
+	 \item Use the LM bullet symbol instead of these circles
+	 \item Surely many more things\ldots
+  \end{itemize}
+\end{frame}
+
+\section{Front and back matter}
+\frame{
+\frametitle{Front matter}
+An LM style agenda similar to the PowerPoint template is generated by using the command {\tt \textbackslash Agenda}. \\
+
+Be sure not to use too many sections and subsections so as to not saturate it.
+}
+\frame{
+\frametitle{Back matter}
+By using the command {\tt \textbackslash ClosePresentation} the last slide is generated. It contains LM's standard closing slide with the ``Thank you for your time'' frame title and the information about the owner and LM Wind Power, including the non disclosure clause.
+
+The slide owner's information will be generated using the following commands:
+\begin{itemize}
+  \item {\tt \textbackslash author}
+  \item {\tt \textbackslash jobtitle}
+  \item {\tt \textbackslash department}
+  \item {\tt \textbackslash phone} (optional)
+  \item {\tt \textbackslash mobile} (optional)
+  \item {\tt \textbackslash email} (optional)
+\end{itemize}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Back matter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%This command inserts the ``Thank you for your attention''/Contact information
+%slide with the information that was provided before about the owner information
+\ClosePresentation
+
+\end{document}
+
